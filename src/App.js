@@ -45,7 +45,9 @@ function App() {
     if (search.trim() !== "") {
       setLoading(true);
       axios
-        .get("https://powerful-chamber-51238.herokuapp.com/api/search/" + search)
+        .get(
+          "https://powerful-chamber-51238.herokuapp.com/api/search/" + search
+        )
         .then((result) => {
           setProfileChallenges([...result.data]);
           setLoading(false);
@@ -69,6 +71,18 @@ function App() {
 
       setRequiredChallenges([...currentRequiredChallenges]);
       setChallenge("");
+    }
+  };
+
+  const getProfileChallenges = () => {
+    if (searchProfileChallenges.trim() !== "") {
+      return profileChallenges.filter((pc) =>
+        pc.name
+          .toLowerCase()
+          .includes(searchProfileChallenges.toLowerCase().trim())
+      );
+    } else {
+      return profileChallenges;
     }
   };
 
@@ -193,7 +207,9 @@ function App() {
                   .map((rc) => (
                     <li key={rc.name} className="RequiredChallengeItem">
                       <div className="RequiredChallengeItemInfos">
-                        <a href={rc.link} target="_blank" rel="noreferrer">{rc.name}</a>
+                        <a href={rc.link} target="_blank" rel="noreferrer">
+                          {rc.name}
+                        </a>
                         <span>{rc.topic}</span>
                       </div>
                       {profileChallenges.some((pc) => pc.name === rc.name) ? (
@@ -314,7 +330,7 @@ function App() {
               <ul className="ProfileChallengesList">
                 {profileChallenges.length > 0 ? (
                   <>
-                    {profileChallenges
+                    {getProfileChallenges()
                       .slice(
                         (profileChallengesCurrentPage - 1) * 10,
                         profileChallengesCurrentPage * 10

@@ -45,7 +45,7 @@ function App() {
     if (search.trim() !== "") {
       setLoading(true);
       axios
-        .get("http://localhost:5000/api/search/" + search)
+        .get("https://powerful-chamber-51238.herokuapp.com/api/search/" + search)
         .then((result) => {
           setProfileChallenges([...result.data]);
           setLoading(false);
@@ -193,7 +193,7 @@ function App() {
                   .map((rc) => (
                     <li key={rc.name} className="RequiredChallengeItem">
                       <div className="RequiredChallengeItemInfos">
-                        <a href={rc.link} target="_blank">{rc.name}</a>
+                        <a href={rc.link} target="_blank" rel="noreferrer">{rc.name}</a>
                         <span>{rc.topic}</span>
                       </div>
                       {profileChallenges.some((pc) => pc.name === rc.name) ? (
@@ -321,7 +321,7 @@ function App() {
                       )
                       .map((pc) => (
                         <li key={pc.name} className="ProfileChallengeItem">
-                          <a href={pc.link} target="_blank">
+                          <a href={pc.link} target="_blank" rel="noreferrer">
                             {pc.name}
                           </a>
                           <span>{pc.date}</span>

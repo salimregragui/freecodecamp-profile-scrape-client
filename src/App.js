@@ -135,6 +135,7 @@ function App() {
               placeholder="Search for a profile to check progress"
               onChange={(e) => setSearch(e.target.value)}
             />
+            <button type="submit">Search</button>
           </form>
         </li>
 
